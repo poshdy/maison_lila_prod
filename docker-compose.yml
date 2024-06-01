@@ -1,13 +1,26 @@
 version: "3"
 services:
   server:
-    image: posh3120/maison_lila_server:v0.1
+    image: posh3120/maison_lila_sever:v0.1
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 1
+        delay: 15s
     depends_on:
       - postgres
-    env_file:
-      - .env
+    environment:
+      - MAISON_LILA_SHOP_URL=${MAISON_LILA_SHOP_URL}
+      - DATABASE_URL=${DATABASE_URL}
+      - ACCESS_TOKEN=${ACCESS_TOKEN}
+      - REFRESH_TOKEN=${REFRESH_TOKEN}
+      - APP_PASSWORD=${APP_PASSWORD}
     ports:
       - 8081:8000
+    networks:
+      - mynetwork
 
   adminer:
     image: adminer
@@ -15,29 +28,59 @@ services:
       - 8080:8080
     depends_on:
       - postgres
+    networks:
+      - mynetwork
 
   postgres:
     image: postgres:16
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
     volumes:
       - postgres:/var/lib/postgresql/data
+    networks:
+      - mynetwork
 
   admin:
-    image: posh3120/maison_lila_dashboard:v0.1
+    image: posh3120/maison_lila_dashboard:v0.2
+    deploy:
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 1
+        delay: 15s
     depends_on:
       - server
+    environment:
+      - NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dq2hgf98y
     ports:
       - 8083:3001
+    networks:
+      - mynetwork
 
   store:
-    image: posh3120/maison_lila_store:v0.1
+    image: posh3120/maison_lila_store:v0.2
     deploy:
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 1
+        delay: 15s
+    environment:
+      - NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dq2hgf98y
     depends_on:
       - server
       - admin
     ports:
       - 8082:3000
+    networks:
+      - mynetwork
 
 volumes:
   postgres:
+networks:
+  mynetwork:
+    driver: overlay
