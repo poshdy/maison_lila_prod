@@ -8,7 +8,7 @@ services:
         condition: any
       update_config:
         parallelism: 1
-        delay: 15s
+        delay: 10s
     depends_on:
       - postgres
     environment:
