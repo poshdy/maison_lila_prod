@@ -45,7 +45,7 @@ services:
       - mynetwork
 
   admin:
-    image: posh3120/maison_lila_dashboard:v0.4
+    image: posh3120/maison_lila_dashboard:v0.5
     deploy:
       restart_policy:
         condition: any
