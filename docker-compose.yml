@@ -62,7 +62,7 @@ services:
       - mynetwork
 
   store:
-    image: posh3120/maison_lila_store:v0.2
+    image: posh3120/maison_lila_store:v0.3
     deploy:
       restart_policy:
         condition: any
