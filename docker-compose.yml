@@ -1,7 +1,7 @@
 version: "3"
 services:
   server:
-    image: posh3120/maison_lila_server:v0.3
+    image: posh3120/maison_lila_server:v0.4
     deploy:
       replicas: 2
       restart_policy:
@@ -46,7 +46,7 @@ services:
       - mynetwork
 
   admin:
-    image: posh3120/maison_lila_dashboard:v0.3
+    image: posh3120/maison_lila_dashboard:v0.4
     deploy:
       restart_policy:
         condition: any
@@ -63,7 +63,7 @@ services:
       - mynetwork
 
   store:
-    image: posh3120/maison_lila_store:v0.4
+    image: posh3120/maison_lila_store:v0.5
     deploy:
       restart_policy:
         condition: any
