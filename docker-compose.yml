@@ -1,7 +1,7 @@
 version: "3"
 services:
   server:
-    image: posh3120/maison_lila_backend:v0.1
+    image: posh3120/maison_lila_server:v0.1
     deploy:
       replicas: 2
       restart_policy:
