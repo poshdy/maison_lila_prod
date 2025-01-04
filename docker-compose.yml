@@ -3,7 +3,6 @@ services:
   server:
     image: posh3120/maison_lila_server:v0.5
     deploy:
-      replicas: 2
       restart_policy:
         condition: any
       update_config:
