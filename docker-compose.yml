@@ -1,13 +1,10 @@
 version: "3"
 services:
   server:
-    image: posh3120/maison_lila_server:v0.4
+    image: posh3120/server:prod
     deploy:
       restart_policy:
         condition: any
-      update_config:
-        parallelism: 1
-        delay: 10s
     depends_on:
       - postgres
     environment:
@@ -45,7 +42,7 @@ services:
       - mynetwork
 
   admin:
-    image: posh3120/maison_lila_dashboard:v0.6
+    image: posh3120/dashboard:latest
     deploy:
       restart_policy:
         condition: any
@@ -62,7 +59,7 @@ services:
       - mynetwork
 
   store:
-    image: posh3120/maison_lila_store:v0.6
+    image: posh3120/store:prod
     deploy:
       restart_policy:
         condition: any
@@ -87,3 +84,7 @@ volumes:
 networks:
   mynetwork:
     driver: overlay
+
+  # image: posh3120/maison_lila_dashboard:v0.6
+  # image: posh3120/maison_lila_server:v0.4
+  # image: posh3120/maison_lila_store:v0.6
