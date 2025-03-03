@@ -58,6 +58,29 @@ services:
     networks:
       - mynetwork
 
+  delivery:
+    image: posh3120/delivery:prodv1.1
+    deploy:
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 1
+        delay: 15s
+    depends_on:
+      - server
+    environment:
+      - NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dq2hgf98y
+      - DELIVERY_DATABASE_URL=${DELIVERY_DATABASE_URL}
+      - AUTH_SECRET=${AUTH_SECRET}
+      - NEXT_PUBLIC_CLOUDINARY_FOLDER_DEV=${NEXT_PUBLIC_CLOUDINARY_FOLDER_DEV}
+      - NEXT_PUBLIC_CLOUDINARY_FOLDER_PROD=${NEXT_PUBLIC_CLOUDINARY_FOLDER_PROD}
+      - NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=${NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+      - AUTH_TRUST_HOST=${AUTH_TRUST_HOST}
+    ports:
+      - 8084:3002
+    networks:
+      - mynetwork
+
   store:
     image: posh3120/store:prodv1.1
     deploy:
