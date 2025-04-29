@@ -1,7 +1,7 @@
 version: "3"
 services:
   server:
-    image: posh3120/server:prodv1.4
+    image: posh3120/server:prodv1.5
     deploy:
       restart_policy:
         condition: any
@@ -42,7 +42,7 @@ services:
       - mynetwork
 
   admin:
-    image: posh3120/dashboard:prodv1.4
+    image: posh3120/dashboard:prodv1.5
     deploy:
       restart_policy:
         condition: any
