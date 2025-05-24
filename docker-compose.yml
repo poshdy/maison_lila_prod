@@ -102,19 +102,6 @@ services:
     networks:
       - mynetwork
 
-  migration:
-    image: posh3120/migration:v1
-    deploy:
-      restart_policy:
-        condition: any
-    environment:
-      - DELIVERY_DATABASE_URL=${DELIVERY_DATABASE_URL}
-    depends_on:
-      - postgres
-      - delivery
-    networks:
-      - mynetwork
-
 volumes:
   postgres:
 networks:
