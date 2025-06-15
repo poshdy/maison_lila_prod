@@ -59,7 +59,7 @@ services:
       - mynetwork
 
   delivery:
-    image: posh3120/delivery:prodv1.9
+    image: posh3120/delivery:prodv2.1
     deploy:
       restart_policy:
         condition: any
