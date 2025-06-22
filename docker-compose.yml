@@ -42,7 +42,7 @@ services:
       - mynetwork
 
   admin:
-    image: posh3120/dashboard:prodv0.1
+    image: posh3120/dashboard:prodv1.7
     deploy:
       restart_policy:
         condition: any
